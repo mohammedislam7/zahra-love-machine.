@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>رسالة إلى زهرة ❤️</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;700&display=swap');
+
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,#14001f,#4b003f,#90005d);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+
+.container{
+
+    width:90%;
+    max-width:750px;
+    padding:40px;
+    text-align:center;
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(20px);
+    border-radius:30px;
+    box-shadow:0 0 50px rgba(255,100,180,.5);
+
+}
+
+
+h1{
+
+    color:#ffb6dd;
+    font-size:42px;
+
+}
+
+
+.text{
+
+    font-size:24px;
+    line-height:2;
+    min-height:220px;
+
+}
+
+
+button{
+
+    border:none;
+    border-radius:50px;
+    padding:15px 35px;
+    margin:10px;
+    font-size:20px;
+    cursor:pointer;
+    background:#ff4f9a;
+    color:white;
+    transition:.3s;
+
+}
+
+
+button:hover{
+
+    transform:scale(1.1);
+
+}
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+.heart{
+
+    position:absolute;
+    animation:up 6s linear forwards;
+    font-size:30px;
+
+}
+
+
+
+@keyframes up{
+
+from{
+
+    transform:translateY(100vh);
+    opacity:1;
+
+}
+
+to{
+
+    transform:translateY(-120vh);
+    opacity:0;
+
+}
+
+}
+
+
+.flower{
+
+    position:absolute;
+    animation:fall 8s linear forwards;
+
+}
+
+
+@keyframes fall{
+
+from{
+
+transform:translateY(-20vh) rotate(0deg);
+
+}
+
+to{
+
+transform:translateY(110vh) rotate(360deg);
+
+}
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<div class="container">
+
+
+<h1 id="title">
+
+❤️ رسالة إلى زهرة ❤️
+
+</h1>
+
+
+<div id="choose">
+
+<h2>
+Choose your language / اختاري لغتك
+</h2>
+
+<button onclick="start('ar')">
+🇩🇿 العربية
+</button>
+
+
+<button onclick="start('en')">
+🇬🇧 English
+</button>
+
+</div>
+
+
+
+
+<div id="content" class="hidden">
+
+
+<div class="text" id="text"></div>
+
+
+<button onclick="nextMessage()" id="button">
+
+اضغطي هنا ❤️
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+
+let lang="ar";
+
+let index=0;
+
+
+
+const arabic=[
+
+
+"أهلاً زهرة ❤️<br><br>هذه ليست مجرد صفحة... هذه رسالة صغيرة من قلبي إليكِ 🌹",
+
+
+"زهرة ❤️<br><br>منذ أن دخلتِ حياتي، أصبحت هناك أشياء بسيطة تجعلني أبتسم بدون سبب... لأنكِ أنتِ السبب.",
+
+
+"أحب ضحكتك، أحب كلامك، وأحب التفاصيل الصغيرة التي تجعلك أنتِ ❤️",
+
+
+"قد لا أستطيع دائمًا إيجاد الكلمات المناسبة، لكن أريدك أن تعرفي أنكِ شخص مميز جدًا بالنسبة لي.",
+
+
+"عندما تكونين سعيدة أفرح، وعندما تكونين حزينة أتمنى لو أستطيع أخذ كل تعبك بعيدًا عنكِ 🫂",
+
+
+"لا أعدك أن الحياة ستكون دائمًا سهلة... لكن أعدك أنني سأحاول دائمًا أن أكون سببًا في ابتسامتك ❤️",
+
+
+"زهرة 🌹<br><br>شكراً لأنك أنتِ... شكراً على وجودك، وعلى كل لحظة جميلة بيننا.",
+
+
+"أحبك يا زهرة ❤️<br><br>أكثر مما تستطيع الكلمات أن تصفه."
+
+];
+
+
+
+const english=[
+
+
+"Welcome Zahra ❤️<br><br>This is not just a webpage... it's a little message from my heart to you 🌹",
+
+
+"Zahra ❤️<br><br>Since you came into my life, little things started making me smile for no reason... because you are the reason.",
+
+
+"I love your smile, your words, and the little details that make you who you are ❤️",
+
+
+"I may not always find the perfect words, but I want you to know that you are someone very special to me.",
+
+
+"When you are happy, I feel happy. When you are tired, I wish I could take all your worries away 🫂",
+
+
+"I can't promise life will always be easy... but I promise I will always try to be a reason for your smile ❤️",
+
+
+"Zahra 🌹<br><br>Thank you for being you. Thank you for every beautiful moment.",
+
+
+"I love you Zahra ❤️<br><br>More than words could ever explain."
+
+];
+
+
+
+function start(language){
+
+
+lang=language;
+
+
+document.getElementById("choose").classList.add("hidden");
+
+document.getElementById("content").classList.remove("hidden");
+
+
+if(lang=="en"){
+
+document.getElementById("button").innerHTML="Click here ❤️";
+
+document.body.style.direction="ltr";
+
+}
+
+
+show();
+
+
+hearts();
+
+
+}
+
+
+
+function show(){
+
+
+let arr=lang=="ar"?arabic:english;
+
+
+document.getElementById("text").innerHTML=arr[index];
+
+
+hearts();
+
+
+}
+
+
+
+function nextMessage(){
+
+
+let arr=lang=="ar"?arabic:english;
+
+
+index++;
+
+
+if(index>=arr.length){
+
+index=0;
+
+}
+
+
+show();
+
+
+}
+
+
+
+
+function hearts(){
+
+
+for(let i=0;i<8;i++){
+
+
+let h=document.createElement("div");
+
+
+h.className="heart";
+
+
+h.innerHTML=Math.random()>0.5?"❤️":"💖";
+
+
+h.style.left=Math.random()*100+"vw";
+
+
+h.style.animationDuration=(3+Math.random()*4)+"s";
+
+
+document.body.appendChild(h);
+
+
+setTimeout(()=>h.remove(),6000);
+
+
+}
+
+
+
+}
+
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
